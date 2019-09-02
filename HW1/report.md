@@ -1,18 +1,21 @@
 # 实验报告：搭建云桌面私有云服务
 
-> 16305204 郑佳豪
+> 16305204 郑佳豪 2017 级软件工程教务 2 班
 
 博客链接：[搭建云桌面私有云服务](https://blog.jiahonzheng.cn/2019/09/02/%E6%90%AD%E5%BB%BA%E4%BA%91%E6%A1%8C%E9%9D%A2%E7%A7%81%E6%9C%89%E4%BA%91%E6%9C%8D%E5%8A%A1/)
 
-## 云桌面
+## 实验目的
 
-相信中山大学的同学对**云桌面**并不陌生，每当期中考和期末考时，计算机和软件工程的学生都得在某云桌面上，进行上机考试。腾讯云主机、阿里云主机、Vultr 以及搬瓦工，都在提供与云桌面类似的服务（VPS）。
+- 初步了解虚拟化技术，理解云计算的相关概念
+- 理解系统工程师面临的困境
+- 理解自动化安装、管理（DevOps）在云应用中的重要性
 
-云桌面，是当前**移动办公**的高效解决方案。在使用云桌面技术后，用户无需再购买电脑主机，主机所包含的 CPU、内存、硬盘、网卡等组件全部在后端的服务器中虚拟出来，用户在安装客户端后，通过特有的通信协议访问后端服务器上的虚拟机主机来实现交互式操作，达到与电脑一致的体验效果。
+## 实验环境与要求
 
-## 搭建服务
+- 用户通过互联网，使用微软远程桌面，远程访问你在 PC 机上创建的虚拟机
+- 虚拟机操作系统 Centos，Ubuntu，或 你喜欢的 Linux 发行版，能使用 NAT 访问外网。
 
-现在，就让我们使用 VMware Workstation 搭建私有的云桌面服务。
+## 实验过程
 
 ### 下载
 
@@ -82,6 +85,39 @@ service network restart
 ![](https://jiahonzheng-blog.oss-cn-shenzhen.aliyuncs.com/%E6%90%AD%E5%BB%BA%E4%BA%91%E6%A1%8C%E9%9D%A2%E7%A7%81%E6%9C%89%E4%BA%91%E6%9C%8D%E5%8A%A1_6.jpg)
 
 ![](https://jiahonzheng-blog.oss-cn-shenzhen.aliyuncs.com/%E6%90%AD%E5%BB%BA%E4%BA%91%E6%A1%8C%E9%9D%A2%E7%A7%81%E6%9C%89%E4%BA%91%E6%9C%8D%E5%8A%A1_7.jpg)
+
+### 更新内核
+
+在虚拟机能够正常访问外网的情况下，我们对操作系统内核尝试进行升级。
+
+```bash
+yum install wget
+# 升级 OS 内核
+yum update
+```
+
+### 更新 yum 源
+
+`CentOS` 已内置 163 源 ，若要更新至其他源，可按照如下步骤操作：
+
+- 首先备份 `/etc/yum.repos.d/CentOS-Base.repo`
+
+```bash
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+```
+
+- 下载对应 `repo` 文件，放置于 `/etc/yum.repos.d/` 目录
+
+```bash
+mv ***.repo /etc/yum.repos.d/CentOS-Base.repo
+```
+
+- 生成 `yum` 缓存
+
+```bash
+yum clean all
+yum makecache
+```
 
 ### SSH 登录
 
@@ -167,7 +203,10 @@ chcon --type=bin_t /usr/sbin/xrdp-sesman
 
 我们可在 VMware 的 VM -> Manage -> Clone 进行虚拟机的批量生产。
 
-## 参考资料
+## 实验心得
 
-- [How to interpret this yum dependency error?](https://serverfault.com/questions/979672/how-to-interpret-this-yum-dependency-error)
-- [CentOS 7 如何安装 xrdp ？](https://www.jb51.net/os/RedHat/531360.html)
+经过本次实验，我对云计算中的**云桌面**概念有了更为深刻的认识：在云桌面技术的使用下，用户无需再购买电脑主机，其所需要的硬件资源是在后端的服务器中虚拟出来的。通过云桌面客户端，用户可与后端服务器上的虚拟机实现交互式操作，达到与电脑一致的体验效果。
+
+在安装 `xrdp` 服务时，我遇到了安装失败的问题（`xorg-x11`版本不兼容的问题），后来经过查阅众多技术论坛，解决了此问题，虽然耽误了很多时间，但问题解决后，成就感满满。
+
+总体来说，本次实验是成功的，我从中对虚拟化技术、云计算技术有了更进一步的认识，希望自己在未来的学习中，能够继续保持学习的热情，不断用技术武装自己的大脑。
