@@ -52,7 +52,7 @@ func listUsers(cmd *cobra.Command, args []string) error {
 
 var (
 	deleteCurrentUserCmd = cobra.Command{
-		Use:   "d",
+		Use:   "dc",
 		Short: "Delete current user",
 		Long:  "Delete current user, logged in required",
 	}
