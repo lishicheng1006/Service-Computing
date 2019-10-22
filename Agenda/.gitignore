@@ -1,6 +1,9 @@
 **/.idea/
 **/.vscode/
 
+# Data
+*.json
+
 
 # Created by https://www.gitignore.io/api/go,macos,windows
 # Edit at https://www.gitignore.io/?templates=go,macos,windows
