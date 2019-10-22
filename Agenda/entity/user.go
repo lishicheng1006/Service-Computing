@@ -21,8 +21,7 @@ var usersStorage = Storage{Path: "users.json"}
 
 func GetUsers() *Users {
 	users := new(Users)
-	err := usersStorage.Load(&users.Users)
-	if err != nil && os.IsNotExist(err) {
+	if err := usersStorage.Load(&users.Users); err != nil && !os.IsNotExist(err) {
 		log.Fatalln("Unable to load users data.")
 	}
 	return users

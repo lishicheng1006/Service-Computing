@@ -2,6 +2,7 @@ package entity
 
 import (
 	"log"
+	"os"
 )
 
 type Session struct {
@@ -12,8 +13,7 @@ var sessionStorage = Storage{Path: "session.json"}
 
 func GetSession() *Session {
 	session := new(Session)
-	err := sessionStorage.Load(session)
-	if err != nil {
+	if err := sessionStorage.Load(session); err != nil && !os.IsNotExist(err) {
 		log.Fatalln("Unable to load session data.")
 	}
 	return session
