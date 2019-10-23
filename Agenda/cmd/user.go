@@ -49,7 +49,7 @@ var (
 
 // listAllUsers responds to List All Users Command.
 func listAllUsers(cmd *cobra.Command, args []string) error {
-	err := service.ListUsers()
+	err := service.ListAllUsers()
 	checkError(err)
 	return nil
 }

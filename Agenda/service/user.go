@@ -23,7 +23,7 @@ func Register(username, password, email, phone string) error {
 }
 
 // ListAllUsers list all users.
-func ListUsers() error {
+func ListAllUsers() error {
 	if _, err := checkLogin(); err != nil {
 		return err
 	}
