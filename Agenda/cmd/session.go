@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Login Command
 var (
 	loginCmd = cobra.Command{
 		Use:   "l",
@@ -16,6 +17,7 @@ var (
 	loginCmdPasswordP = loginCmd.Flags().StringP("password", "p", "", "password of a registered account")
 )
 
+// login responds to Login Command.
 func login(cmd *cobra.Command, args []string) error {
 	if *loginCmdUsernameP == "" {
 		return errors.New("username is required")
@@ -28,6 +30,7 @@ func login(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
+// Logout Command
 var (
 	logoutCmd = cobra.Command{
 		Use:   "o",
@@ -36,6 +39,7 @@ var (
 	}
 )
 
+// logout responds to Logout Command.
 func logout(cmd *cobra.Command, args []string) error {
 	err := service.Logout()
 	checkError(err)
@@ -45,5 +49,6 @@ func logout(cmd *cobra.Command, args []string) error {
 func init() {
 	loginCmd.RunE = login
 	logoutCmd.RunE = logout
+	// Add commands.
 	rootCmd.AddCommand(&loginCmd, &logoutCmd)
 }

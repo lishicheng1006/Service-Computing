@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Register Command
 var (
 	registerCmd = cobra.Command{
 		Use:   "r",
@@ -18,6 +19,7 @@ var (
 	registerPhoneP    = registerCmd.Flags().StringP("phone", "t", "", "phone of the user")
 )
 
+// register responds to Register Command.
 func register(cmd *cobra.Command, args []string) error {
 	if *registerUsernameP == "" {
 		return errors.New("username is required")
@@ -36,20 +38,23 @@ func register(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
+// List All Users Command
 var (
-	listUsersCmd = cobra.Command{
-		Use:   "la",
+	listAllUsersCmd = cobra.Command{
+		Use:   "lau",
 		Short: "List all users",
 		Long:  "List all users, logged in required",
 	}
 )
 
-func listUsers(cmd *cobra.Command, args []string) error {
+// listAllUsers responds to List All Users Command.
+func listAllUsers(cmd *cobra.Command, args []string) error {
 	err := service.ListUsers()
 	checkError(err)
 	return nil
 }
 
+// Delete Current User Command
 var (
 	deleteCurrentUserCmd = cobra.Command{
 		Use:   "dc",
@@ -58,6 +63,7 @@ var (
 	}
 )
 
+// deleteCurrentUser responds to Delete Current User Command.
 func deleteCurrentUser(cmd *cobra.Command, args []string) error {
 	err := service.DeleteCurrentUser()
 	checkError(err)
@@ -66,7 +72,8 @@ func deleteCurrentUser(cmd *cobra.Command, args []string) error {
 
 func init() {
 	registerCmd.RunE = register
-	listUsersCmd.RunE = listUsers
+	listAllUsersCmd.RunE = listAllUsers
 	deleteCurrentUserCmd.RunE = deleteCurrentUser
-	rootCmd.AddCommand(&registerCmd, &listUsersCmd, &deleteCurrentUserCmd)
+	// Add commands.
+	rootCmd.AddCommand(&registerCmd, &listAllUsersCmd, &deleteCurrentUserCmd)
 }

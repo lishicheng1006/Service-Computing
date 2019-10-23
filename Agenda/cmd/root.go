@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// checkError is a tool function helps handle error.
 func checkError(err error) {
 	if err != nil {
 		_, _ = fmt.Fprintf(os.Stderr, "Error: %s\n", err)
@@ -15,10 +16,11 @@ func checkError(err error) {
 
 var rootCmd = &cobra.Command{
 	Use:   "agenda",
-	Short: "CLI App for user and meeting management",
-	Long:  "Agenda is an application for user and meeting management.",
+	Short: "Application for meeting management.",
+	Long:  "Agenda is an application for meeting management.",
 }
 
+// Execute runs the CLI application.
 func Execute() {
 	err := rootCmd.Execute()
 	checkError(err)

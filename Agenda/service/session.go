@@ -9,6 +9,7 @@ var ErrNeedLogIn = errors.New("need login")
 var ErrHaveLoggedIn = errors.New("have logged in")
 var ErrWrongUsernameOrPassword = errors.New("wrong username or password")
 
+// checkLogin checks whether Agenda is logged in.
 func checkLogin() (string, error) {
 	username, ok := session.GetCurrentUser()
 	if !ok {
@@ -17,6 +18,7 @@ func checkLogin() (string, error) {
 	return username, nil
 }
 
+// Login via username and password.
 func Login(username, password string) error {
 	if _, err := checkLogin(); err == nil {
 		return ErrHaveLoggedIn
@@ -31,6 +33,7 @@ func Login(username, password string) error {
 	return nil
 }
 
+// Logout the current user.
 func Logout() error {
 	var username string
 	username, err := checkLogin()
