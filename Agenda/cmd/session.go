@@ -11,7 +11,7 @@ var (
 	loginCmd = cobra.Command{
 		Use:   "l",
 		Short: "Log in",
-		Long:  "Log in Agenda with username and password of a registered account",
+		Long:  "Log in Agenda with username and password of a registered account.",
 	}
 	loginCmdUsernameP = loginCmd.Flags().StringP("username", "u", "", "username of a registered account")
 	loginCmdPasswordP = loginCmd.Flags().StringP("password", "p", "", "password of a registered account")
@@ -35,7 +35,7 @@ var (
 	logoutCmd = cobra.Command{
 		Use:   "o",
 		Short: "Log out",
-		Long:  "Log out current account",
+		Long:  "Log out current account.",
 	}
 )
 

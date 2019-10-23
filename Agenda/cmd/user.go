@@ -11,7 +11,7 @@ var (
 	registerCmd = cobra.Command{
 		Use:   "r",
 		Short: "Register a new user",
-		Long:  "Register a new user with username, password, email and phone",
+		Long:  "Register a new user with username, password, email and phone.",
 	}
 	registerUsernameP = registerCmd.Flags().StringP("username", "u", "", "username of the user")
 	registerPasswordP = registerCmd.Flags().StringP("password", "p", "", "password of the user")
@@ -43,7 +43,7 @@ var (
 	listAllUsersCmd = cobra.Command{
 		Use:   "lau",
 		Short: "List all users",
-		Long:  "List all users, logged in required",
+		Long:  "List all users, logged in required.",
 	}
 )
 
@@ -59,7 +59,7 @@ var (
 	deleteCurrentUserCmd = cobra.Command{
 		Use:   "dc",
 		Short: "Delete current user",
-		Long:  "Delete current user, logged in required",
+		Long:  "Delete current user, logged in required.",
 	}
 )
 
