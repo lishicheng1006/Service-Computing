@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>User Info</title>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="/images/Jiahonzheng.jpeg" />
+    <link rel="stylesheet" href="/css/semantic.min.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <script src="/js/jquery-3.3.1.min.js"></script>
+  </head>
+
+  <body>
+    <div class="ui middle aligned center aligned grid">
+      <div class="column">
+      {{ if .StuId }}
+        <table class="ui table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Student ID</td>
+              <td>{{.StuId}}</td>
+            </tr>
+            <tr>
+              <td>Username</td>
+              <td>{{.Username}}</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>{{.Email}}</td>
+            </tr>
+            <tr>
+              <td>Phone</td>
+              <td>{{.Phone}}</td>
+            </tr>
+          </tbody>
+        </table>
+      {{ else }}
+        <div class="ui error message" id="errors">
+          <div>User does not exist.</div>
+        </div>
+      {{ end }}
+        <div class="ui message">
+          <a href="/">Register</a> or
+          <a href="/login.html">Login</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
