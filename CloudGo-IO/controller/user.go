@@ -15,7 +15,7 @@ type UserController struct{}
 var userService = new(user.Service)
 
 func handleError(w http.ResponseWriter, err error) {
-	if errorCode, ok := errors.FromErrorCode(err); ok {
+	if errorCode, ok := errors.FromErrCode(err); ok {
 		w.WriteHeader(errorCode.HTTPStatusCode)
 		_ = json.NewEncoder(w).Encode(errorCode)
 	} else {

@@ -3,7 +3,7 @@ package errors
 import . "errors"
 
 var (
-	codes = make(map[error]ErrorCode)
+	codes = make(map[error]ErrCode)
 
 	ErrInvalidStuId     = New("invalid student id")
 	ErrInvalidUsername  = New("invalid username")
@@ -13,19 +13,19 @@ var (
 	ErrUserDoesNotExist = New("user does not exist")
 )
 
-type ErrorCode struct {
+type ErrCode struct {
 	Code           int    `json:"code,omitempty"`
 	Message        string `json:"msg,omitempty"`
 	HTTPStatusCode int    `json:"-"`
 }
 
 func init() {
-	newErrorCode(ErrInvalidStuId, 401, 1)
-	newErrorCode(ErrInvalidUsername, 401, 2)
-	newErrorCode(ErrInvalidEmail, 401, 3)
-	newErrorCode(ErrInvalidPhone, 401, 4)
-	newErrorCode(ErrUserExists, 401, 5)
-	newErrorCode(ErrUserDoesNotExist, 401, 6)
+	newErrCode(ErrInvalidStuId, 401, 1)
+	newErrCode(ErrInvalidUsername, 401, 2)
+	newErrCode(ErrInvalidEmail, 401, 3)
+	newErrCode(ErrInvalidPhone, 401, 4)
+	newErrCode(ErrUserExists, 401, 5)
+	newErrCode(ErrUserDoesNotExist, 401, 6)
 }
 
 type OK struct {
@@ -37,13 +37,13 @@ func OKCode(data interface{}) OK {
 	return OK{200, data}
 }
 
-func FromErrorCode(err error) (ErrorCode, bool) {
+func FromErrCode(err error) (ErrCode, bool) {
 	v, ok := codes[err]
 	return v, ok
 }
 
-func newErrorCode(err error, status int, code int, ) {
-	errCode := ErrorCode{
+func newErrCode(err error, status int, code int) {
+	errCode := ErrCode{
 		Code:           code,
 		Message:        err.Error(),
 		HTTPStatusCode: status,
