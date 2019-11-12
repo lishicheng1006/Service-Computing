@@ -3,7 +3,8 @@ package route
 import "net/http"
 
 func init() {
-	http.HandleFunc("/unknown", func(w http.ResponseWriter, req *http.Request) {
+	http.HandleFunc("/api/unknown", func(w http.ResponseWriter, req *http.Request) {
 		w.WriteHeader(http.StatusNotImplemented)
+		_, _ = w.Write([]byte("Method Not Implemented!"))
 	})
 }
